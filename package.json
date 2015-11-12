@@ -1,0 +1,22 @@
+{
+  "name": "file-schema-detector",
+  "version": "1.0.0",
+  "description": "",
+  "main": "scripts/main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "timwis <tim@timwis.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "handlebars": "^4.0.4",
+    "handlebars-loader": "^1.1.4",
+    "jquery": "^2.1.4",
+    "webpack": "^1.12.4"
+  },
+  "dependencies": {
+    "lodash": "^3.10.1",
+    "moment": "^2.10.6",
+    "papaparse": "^4.1.2"
+  }
+}

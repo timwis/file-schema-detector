@@ -1,0 +1,20 @@
+<form class="form-horizontal">
+	<div class="form-group">
+		{{#each fields}}
+		<label for="{{@key}}" class="col-sm-2 control-label">{{@key}}</label>
+		<div class="col-sm-10">
+			<select class="form-control" name="{{@key}}" id="{{@key}}">
+				{{#select this.type}}
+				<option value="string">string</option>
+				<option value="integer">integer</option>
+				<option value="float">float</option>
+				<option value="date">date</option>
+				<option value="datetime">datetime</option>
+				<option value="timestamp">timestamp</option>
+				{{/select}}
+			</select>
+			<span class="help-block">{{this.sample}}</span>
+		</div>
+		{{/each}}
+	</div>
+</form>
