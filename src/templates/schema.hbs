@@ -1,20 +1,45 @@
+<p>Analyzed {{rowCount}} rows</p>
+
 <form class="form-horizontal">
-	<div class="form-group">
-		{{#each fields}}
-		<label for="{{@key}}" class="col-sm-2 control-label">{{@key}}</label>
-		<div class="col-sm-10">
-			<select class="form-control" name="{{@key}}" id="{{@key}}">
-				{{#select this.type}}
-				<option value="string">string</option>
-				<option value="integer">integer</option>
-				<option value="float">float</option>
-				<option value="date">date</option>
-				<option value="datetime">datetime</option>
-				<option value="timestamp">timestamp</option>
-				{{/select}}
-			</select>
-			<span class="help-block">{{this.sample}}</span>
-		</div>
-		{{/each}}
-	</div>
+	<table class="table">
+		<thead>
+			<tr>
+				<th class="field">Field</th>
+				<th class="machine-name">Name</th>
+				<th class="type">Type</th>
+				<th class="length">Length</th>
+				<th class="sample">Sample</th>
+			</tr>
+		</thead>
+		<tbody>
+			{{#each fields}}
+			<tr>
+				<td>
+					<label for="{{@key}}" class="col-sm-2 control-label">{{@key}}</label>
+				</td>
+				<td>
+					<input class="form-control" name="{{@key}}-machine-name" value="{{this.machineName}}">
+				</td>
+				<td>
+					<select class="form-control" name="{{@key}}" id="{{@key}}">
+						{{#select this.fieldType}}
+						<option value="string">string</option>
+						<option value="integer">integer</option>
+						<option value="float">float</option>
+						<option value="date">date</option>
+						<option value="datetime">datetime</option>
+						<option value="timestamp">timestamp</option>
+						{{/select}}
+					</select>
+				</td>
+				<td>
+					<input class="form-control" name="{{@key}}-length" value="{{this.maxLength}}">
+				</td>
+				<td class="sample">
+					<code>{{this.sample}}</code>
+				</td>
+			</tr>
+			{{/each}}
+		</tbody>
+	</table>
 </form>
