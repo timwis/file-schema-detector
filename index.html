@@ -7,84 +7,89 @@
 		<link rel="stylesheet" href="styles/main.css">
 	</head>
 	<body>
-		<div class="container">
-			<div class="row">
-				<div class="col-sm-12">
-					<h1>File Schema Detector</h1>
+		<div id="main"></div>
+		
+		<script type="x-template" id="template">
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-12">
+						<h1>File Schema Detector</h1>
+					</div>
 				</div>
-			</div>
-			<div class="row">
-				<div class="col-sm-12">
-					<form>
-						<input type="file" id="file" v-on:change="fileChange" accept="text/csv,application/csv,text/comma-separated-values,text/tsv,text/tab-separated-values">
-					</form>
+				<div class="row">
+					<div class="col-sm-12">
+						<form>
+							<input type="file" id="file" v-on:change="fileChange" accept="text/csv,application/csv,text/comma-separated-values,text/tsv,text/tab-separated-values">
+						</form>
+					</div>
 				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-12">
-					<span>Analyzed {{rowCount}} rows</span>
-					
-					<div class="btn-group pull-right" role="group" aria-label="Export format">
-						<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							Export <span class="caret"></span>
-						</button>
-						<ul class="dropdown-menu">
-							<li><a href="#" v-on:click.prevent="exportData('mysql')">MySQL</a></li>
-							<li><a href="#" v-on:click.prevent="exportData('mariadb')">MariaDB</a></li>
-							<li><a href="#" v-on:click.prevent="exportData('postgres')">Postgres</a></li>
-							<li><a href="#" v-on:click.prevent="exportData('oracle')">Oracle</a></li>
-							<li><a href="#" v-on:click.prevent="exportData('sqlite3')">SQLite3</a></li>
-						</ul>
+				<div class="row" v-if="fieldCount">
+					<div class="col-md-12">
+						<span>Analyzed {{rowCount}} rows</span>
+						
+						<div class="btn-group pull-right" role="group" aria-label="Export format">
+							<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								Export <span class="caret"></span>
+							</button>
+							<ul class="dropdown-menu">
+								<li><a href="#" v-on:click.prevent="exportData('mysql')">MySQL</a></li>
+								<li><a href="#" v-on:click.prevent="exportData('mariadb')">MariaDB</a></li>
+								<li><a href="#" v-on:click.prevent="exportData('postgres')">Postgres</a></li>
+								<li><a href="#" v-on:click.prevent="exportData('oracle')">Oracle</a></li>
+								<li><a href="#" v-on:click.prevent="exportData('sqlite3')">SQLite3</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div class="row" v-if="fieldCount">
+					<div class="col-sm-12">
+						
+						<form id="schema" class="form-horizontal">
+							<table class="table">
+								<thead>
+									<tr>
+										<th class="field">Field</th>
+										<th class="machine-name">Name</th>
+										<th class="type">Type</th>
+										<th class="length">Length</th>
+										<th class="sample">Sample</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr v-for="field in fields">
+										<td>
+											<label for="{{$key}" class="col-sm-2 control-label">{{$key}}</label>
+										</td>
+										<td>
+											<input class="form-control" id="{{$key}}" v-model="field.machineName">
+										</td>
+										<td>
+											<select class="form-control" v-model="field.fieldType">
+												<option value="string">string</option>
+												<option value="integer">integer</option>
+												<option value="float">float</option>
+												<option value="date">date</option>
+												<option value="datetime">datetime</option>
+												<option value="timestamp">timestamp</option>
+											</select>
+										</td>
+										<td>
+											<input class="form-control" v-model="field.maxLength" v-if="field.fieldType == 'string'">
+											<span v-else>{{field.maxLength}}</span>
+										</td>
+										<td class="sample">
+											<code>{{field.sample}}</code>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</form>
+						
 					</div>
 				</div>
 			</div>
-			<div class="row">
-				<div class="col-sm-12">
-					
-					<form id="schema" class="form-horizontal">
-						<table class="table">
-							<thead>
-								<tr>
-									<th class="field">Field</th>
-									<th class="machine-name">Name</th>
-									<th class="type">Type</th>
-									<th class="length">Length</th>
-									<th class="sample">Sample</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr v-for="field in fields">
-									<td>
-										<label for="{{$key}" class="col-sm-2 control-label">{{$key}}</label>
-									</td>
-									<td>
-										<input class="form-control" id="{{$key}}" v-model="field.machineName">
-									</td>
-									<td>
-										<select class="form-control" v-model="field.fieldType">
-											<option value="string">string</option>
-											<option value="integer">integer</option>
-											<option value="float">float</option>
-											<option value="date">date</option>
-											<option value="datetime">datetime</option>
-											<option value="timestamp">timestamp</option>
-										</select>
-									</td>
-									<td>
-										<!--<input class="form-control" name="fields[{{@index}}][fieldLength]" value="{{field.maxLength}}">-->
-										{{field.maxLength}}
-									</td>
-									<td class="sample">
-										<code>{{field.sample}}</code>
-									</td>
-								</tr>
-							</tbody>
-						</table>
-					</form>
-					
-				</div>
-			</div>
-			
-			<script src="dist/bundle.js"></script>
+		</script>
+		
+		<script src="dist/bundle.js"></script>
 	</body>
 </html>
