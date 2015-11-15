@@ -18,6 +18,7 @@
     "css-loader": "^0.21.0",
     "handlebars": "^4.0.4",
     "handlebars-loader": "^1.1.4",
+    "html-loader": "^0.3.0",
     "jquery": "^2.1.4",
     "style-loader": "^0.13.0",
     "vue-hot-reload-api": "^1.2.0",

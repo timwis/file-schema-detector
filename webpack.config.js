@@ -8,8 +8,7 @@ module.exports = {
 	},
 	module: {
 		loaders: [
-			//{ test: /\.hbs$/, loader: 'handlebars-loader?helperDirs[]=' + __dirname + '/src/helpers' }
-			{ test: /\.vue$/, loader: 'vue' }
+			{ test: /\.html$/, loader: 'html-loader' }
 		]
 	},
 	plugins: [
