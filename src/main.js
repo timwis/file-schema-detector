@@ -1,9 +1,10 @@
 var Vue = require('vue')
-var _ = { keys: require('lodash/object/keys'), values: require('lodash/object/values') }
+var _ = { keys: require('lodash/object/keys'), values: require('lodash/object/values') };
+require('bootstrap/js/dropdown')
+
 var analyze = require('./analyze')
 var exportSql = require('./export-sql')
 var template = require('./template.html')
-require('bootstrap/js/dropdown')
 
 new Vue({
 	el: '#main',

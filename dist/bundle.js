@@ -45,11 +45,12 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	var Vue = __webpack_require__(1)
-	var _ = { keys: __webpack_require__(70), values: __webpack_require__(85) }
+	var _ = { keys: __webpack_require__(70), values: __webpack_require__(85) };
+	__webpack_require__(378)
+
 	var analyze = __webpack_require__(87)
 	var exportSql = __webpack_require__(180)
 	var template = __webpack_require__(377)
-	__webpack_require__(378)
 
 	new Vue({
 		el: '#main',
