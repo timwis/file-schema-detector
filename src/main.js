@@ -2,6 +2,9 @@ var Papa = require('papaparse')
 var slug = require('slug/slug-browser')
 var template = require('./templates/schema.hbs')
 var analyze = require('./analyze')
+var knex = require('knex')
+var $ = require('jquery')
+require('form-serializer')
 
 document.getElementById('file').addEventListener('change', function(e) {
 	var file = e.target.files.length ? e.target.files[0] : null
@@ -49,4 +52,23 @@ document.getElementById('file').addEventListener('change', function(e) {
 			document.getElementById('preview').innerHTML = template({fields: fields, rowCount: rowCount})
 		}
 	})
+})
+
+$(document).on('click', '[data-export]', function(e) {
+	var fields = _.values($('form#schema').serializeObject().fields)
+	
+	// Load a client-specific version of knex
+	var exportFormat = $(e.currentTarget).data('export')
+	var knexClient = knex({client: exportFormat})
+	
+	var sql = knexClient.schema.createTable('foo', function(table) {
+		fields.forEach(function(field) {
+			if(table[field.fieldType] !== undefined) {
+				table[field.fieldType](field.machineName)
+			}
+		})
+	})
+	console.log(sql.toString())
+	
+	e.preventDefault()
 })

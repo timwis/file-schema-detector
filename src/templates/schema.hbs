@@ -1,6 +1,18 @@
-<p>Analyzed {{rowCount}} rows</p>
+<div class="row">
+	<div class="col-md-12">
+		<span>Analyzed {{rowCount}} rows</span>
+		
+		<div class="btn-group pull-right" role="group" aria-label="Export format">
+			<button type="button" class="btn btn-default" data-export="mysql">MySQL</button>
+			<button type="button" class="btn btn-default" data-export="mariadb">MariaDB</button>
+			<button type="button" class="btn btn-default" data-export="postgres">Postgres</button>
+			<button type="button" class="btn btn-default" data-export="oracle">Oracle</button>
+			<button type="button" class="btn btn-default" data-export="sqlite3">SQLite3</button>
+		</div>
+	</div>
+</div>
 
-<form class="form-horizontal">
+<form id="schema" class="form-horizontal">
 	<table class="table">
 		<thead>
 			<tr>
@@ -15,13 +27,13 @@
 			{{#each fields}}
 			<tr>
 				<td>
-					<label for="{{@key}}" class="col-sm-2 control-label">{{@key}}</label>
+					<label for="fields[{{@index}}][machineName]" class="col-sm-2 control-label">{{@key}}</label>
 				</td>
 				<td>
-					<input class="form-control" name="{{@key}}-machine-name" value="{{this.machineName}}">
+					<input class="form-control" name="fields[{{@index}}][machineName]" id="fields[{{@index}}][machineName]" value="{{this.machineName}}">
 				</td>
 				<td>
-					<select class="form-control" name="{{@key}}" id="{{@key}}">
+					<select class="form-control" name="fields[{{@index}}][fieldType]">
 						{{#select this.fieldType}}
 						<option value="string">string</option>
 						<option value="integer">integer</option>
@@ -33,7 +45,8 @@
 					</select>
 				</td>
 				<td>
-					<input class="form-control" name="{{@key}}-length" value="{{this.maxLength}}">
+					<!--<input class="form-control" name="fields[{{@index}}][fieldLength]" value="{{this.maxLength}}">-->
+					{{this.maxLength}}
 				</td>
 				<td class="sample">
 					<code>{{this.sample}}</code>
