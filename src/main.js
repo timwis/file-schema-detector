@@ -1,12 +1,14 @@
+var $ = require('jquery')
+var _ = { values: require('lodash/object/values') }
 var Papa = require('papaparse')
-var slug = require('slug/slug-browser')
+var slug = require('slug')
 var template = require('./templates/schema.hbs')
 var analyze = require('./analyze')
 var knex = require('knex')
-var $ = require('jquery')
 require('form-serializer')
+require('bootstrap/js/dropdown')
 
-document.getElementById('file').addEventListener('change', function(e) {
+$('#file').on('change', function(e) {
 	var file = e.target.files.length ? e.target.files[0] : null
 	var fields = {}
 	var rowCount = 0
@@ -49,7 +51,7 @@ document.getElementById('file').addEventListener('change', function(e) {
 				})
 			}
 			// Render template
-			document.getElementById('preview').innerHTML = template({fields: fields, rowCount: rowCount})
+			$('#preview').empty().append(template({fields: fields, rowCount: rowCount}))
 		}
 	})
 })

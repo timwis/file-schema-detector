@@ -3,11 +3,16 @@
 		<span>Analyzed {{rowCount}} rows</span>
 		
 		<div class="btn-group pull-right" role="group" aria-label="Export format">
-			<button type="button" class="btn btn-default" data-export="mysql">MySQL</button>
-			<button type="button" class="btn btn-default" data-export="mariadb">MariaDB</button>
-			<button type="button" class="btn btn-default" data-export="postgres">Postgres</button>
-			<button type="button" class="btn btn-default" data-export="oracle">Oracle</button>
-			<button type="button" class="btn btn-default" data-export="sqlite3">SQLite3</button>
+			<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				Export <span class="caret"></span>
+			</button>
+			<ul class="dropdown-menu">
+				<li><a href="#" data-export="mysql">MySQL</a></li>
+				<li><a href="#" data-export="mariadb">MariaDB</a></li>
+				<li><a href="#" data-export="postgres">Postgres</a></li>
+				<li><a href="#" data-export="oracle">Oracle</a></li>
+				<li><a href="#" data-export="sqlite3">SQLite3</a></li>
+			</ul>
 		</div>
 	</div>
 </div>

@@ -1,3 +1,5 @@
+var webpack = require('webpack')
+
 module.exports = {
 	entry: './src/main.js',
 	output: {
@@ -8,5 +10,12 @@ module.exports = {
 		loaders: [
 			{ test: /\.hbs$/, loader: 'handlebars-loader?helperDirs[]=' + __dirname + '/src/helpers' }
 		]
-	}
+	},
+	plugins: [
+		new webpack.IgnorePlugin(/unicode\/category\/So/),
+		new webpack.ProvidePlugin({
+			$: "jquery",
+			jQuery: "jquery"
+		})
+	]
 }
