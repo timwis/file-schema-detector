@@ -1,10 +1,15 @@
 var Vue = require('vue')
+var $ = require('jquery')
 var _ = { keys: require('lodash/object/keys'), values: require('lodash/object/values') };
 require('bootstrap/js/dropdown')
+require('bootstrap/js/tooltip')
 
 var analyze = require('./analyze')
 var exportSql = require('./export-sql')
 var template = require('./template.html')
+var fieldTypes = require('./filters/field-types')
+
+Vue.filter('fieldTypes', fieldTypes)
 
 new Vue({
 	el: '#main',
@@ -31,3 +36,6 @@ new Vue({
 		}
 	}
 })
+
+// Initialize future tooltips
+$('body').tooltip({ selector: '[data-toggle="tooltip"]' })

@@ -46,27 +46,28 @@
 					</thead>
 					<tbody>
 						<tr v-for="field in fields">
-							<td>
-								<label for="{{$key}" class="col-sm-2 control-label">{{$key}}</label>
+							<td class="field">
+								<label for="{{$key}" class="control-label">{{$key}}</label>
 							</td>
-							<td>
+							<td class="machine-name">
 								<input class="form-control" id="{{$key}}" v-model="field.machineName">
 							</td>
-							<td>
+							<td class="type">
 								<select class="form-control" v-model="field.fieldType">
 									<option value="string">string</option>
+									<option value="boolean">boolean</option>
 									<option value="integer">integer</option>
 									<option value="float">float</option>
 									<option value="date">date</option>
 									<option value="datetime">datetime</option>
 									<option value="timestamp">timestamp</option>
 								</select>
+								<span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" title="Max Length: {{field.maxLength}}<br>{{field.fieldTypes | fieldTypes}}" data-html="true"></span>
 							</td>
-							<td>
+							<td class="length">
 								<input class="form-control" v-model="field.maxLength" v-if="field.fieldType == 'string'">
-								<span v-else>{{field.maxLength}}</span>
 							</td>
-							<td>
+							<td class="nullable">
 								<input type="checkbox" v-model="field.nullable">
 							</td>
 							<td class="sample">

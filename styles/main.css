@@ -7,8 +7,13 @@
 }
 
 .table .type {
-	width: 110px;
+	width: 130px;
 }
+
+	.table .type select {
+		width: 80%;
+		display: inline-block;
+	}
 
 .table .length {
 	width: 75px;
