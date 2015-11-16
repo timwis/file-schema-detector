@@ -14,6 +14,10 @@
 	width: 75px;
 }
 
+.table .nullable {
+	width: 35px;
+}
+
 td.sample {
 	overflow: hidden;
 	text-overflow: ellipsis;

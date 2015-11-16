@@ -6,9 +6,15 @@ module.exports = function(tableName, fields, client) {
 	
 	var sql = knex.schema.createTable(tableName, function(table) {
 		fields.forEach(function(field) {
-			if(table[field.fieldType] !== undefined) {
-				table[field.fieldType](field.machineName)
+			var column
+			if(field.fieldType === 'string') {
+				column = table.string(field.machineName, field.maxLength) // perhaps currying makes more sense here?
+			} else if(table[field.fieldType] !== undefined) {
+				column = table[field.fieldType](field.machineName)
+			} else {
+				column = table.specificType(field.fieldType, field.machineName)
 			}
+			if(field.nullable) column.nullable()
 		})
 	})
 	return sql.toString()

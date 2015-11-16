@@ -40,6 +40,7 @@
 							<th class="machine-name">Name</th>
 							<th class="type">Type</th>
 							<th class="length">Length</th>
+							<th class="nullable">Null</th>
 							<th class="sample">Sample</th>
 						</tr>
 					</thead>
@@ -64,6 +65,9 @@
 							<td>
 								<input class="form-control" v-model="field.maxLength" v-if="field.fieldType == 'string'">
 								<span v-else>{{field.maxLength}}</span>
+							</td>
+							<td>
+								<input type="checkbox" v-model="field.nullable">
 							</td>
 							<td class="sample">
 								<code>{{field.sample}}</code>
