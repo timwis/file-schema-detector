@@ -30,3 +30,16 @@ td.sample {
 td.sample code {
 	white-space: nowrap;
 }
+
+tr.disabled td {
+	background-color: #dcdcdc;
+}
+tr.disabled input,
+tr.disabled select {
+	color: #dcdcdc;
+	font-style: italic;
+}
+tr.disabled code {
+	background-color: inherit;
+	color: inherit;
+}

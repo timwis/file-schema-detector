@@ -45,16 +45,22 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr v-for="field in fields">
+						<tr v-for="field in fields" v-bind:class="{ 'disabled': ! field.include }">
 							<td class="field">
-								<label for="{{$key}" class="control-label">{{$key}}</label>
+								<label class="control-label">
+									<input type="checkbox" v-model="field.include" checked="checked">
+									{{$key}}
+								</label>
 							</td>
 							<td class="machine-name">
-								<input class="form-control" id="{{$key}}" v-model="field.machineName">
+								<input class="form-control" v-model="field.machineName">
 							</td>
 							<td class="type">
+								<span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" title="Max Length: {{field.maxLength}}<br>{{field.fieldTypes | fieldTypes}}" data-html="true"></span>
+								
 								<select class="form-control" v-model="field.fieldType">
 									<option value="string">string</option>
+									<option value="text">text</option>
 									<option value="boolean">boolean</option>
 									<option value="integer">integer</option>
 									<option value="float">float</option>
@@ -62,7 +68,6 @@
 									<option value="datetime">datetime</option>
 									<option value="timestamp">timestamp</option>
 								</select>
-								<span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" title="Max Length: {{field.maxLength}}<br>{{field.fieldTypes | fieldTypes}}" data-html="true"></span>
 							</td>
 							<td class="length">
 								<input class="form-control" v-model="field.maxLength" v-if="field.fieldType == 'string'">
@@ -78,6 +83,22 @@
 				</table>
 			</form>
 			
+		</div>
+	</div>
+	<div class="modal fade" id="export-result">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title">Export</h4>
+				</div>
+				<div class="modal-body">
+					<pre><code class="sql">{{exportResult}}</code></pre>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>

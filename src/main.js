@@ -3,6 +3,7 @@ var $ = require('jquery')
 var _ = { keys: require('lodash/object/keys'), values: require('lodash/object/values') };
 require('bootstrap/js/dropdown')
 require('bootstrap/js/tooltip')
+require('bootstrap/js/modal')
 
 var analyze = require('./analyze')
 var exportSql = require('./export-sql')
@@ -18,7 +19,8 @@ new Vue({
 		return {
 			fields: {},
 			fieldCount: null,
-			rowCount: null
+			rowCount: null,
+			exportResult: null
 		}
 	},
 	methods: {
@@ -32,7 +34,11 @@ new Vue({
 			})
 		},
 		exportData: function(client) {
-			console.log(exportSql('foo', _.values(this.fields), client))
+			var fields = _.values(this.fields).filter(function(field) {
+				return field.include ? true : false
+			})
+			this.exportResult = exportSql('foo', fields, client)
+			$('#export-result').modal('show')
 		}
 	}
 })
