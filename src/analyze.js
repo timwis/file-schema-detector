@@ -5,6 +5,8 @@ var moment = require('moment')
 var _ = { keys: require('lodash/object/keys') }
 
 var detectType = function(sample) {
+	var lowerSample = sample.toLowerCase()
+	
 	if(sample === '') {
 		return 'null'
 	} else if(moment(sample, moment.ISO_8601, true).isValid()) {
@@ -16,8 +18,12 @@ var detectType = function(sample) {
 		return 'timestamp'
 	} else if( ! isNaN(sample) && sample.indexOf('.') !== -1) {
 		return 'float'
+	} else if(sample === '1' || sample === '0' || lowerSample === 'true' || lowerSample === 'false') {
+		return 'boolean' 
 	} else if( ! isNaN(sample)) {
 		return 'integer'
+	} else if(sample.length > 255) {
+		return 'text'
 	} else {
 		return 'string'
 	}
@@ -36,6 +42,8 @@ var determineWinner = function(fieldTypes) {
 	
 	if(keys.length === 1) {
 		return keys[0]
+	} else if(fieldTypes.text) {
+		return 'text'
 	} else if(fieldTypes.string) {
 		return 'string'
 	} else if(fieldTypes.float) {
